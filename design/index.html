@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://static.dpdocs.org/img/favicon.ico" type="image/x-icon">
+    <title>DP Block Explorer - Doge Protocol</title>
+    <script src="script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="assets/bootstrap/bootstrap.min.css" type="text/css" />
+    <script src="assets/bootstrap/jquery.min.js"></script>
+    <script src="assets/bootstrap/modernizr.min.js" type="text/javascript"></script>
+    <script src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/bootstrap/moment-with-locales.js"></script>
+    <script src="assets/bootstrap/Chart.min.js"></script>
+</head>
+
+<body>
+    <div id="divSideMenuBurger" class="burgermenu">
+        <img src="assets/img/ellipsis-vertical-outline.svg" class="burgermenuicon" onclick="return openNav();" alt="menu" />
+    </div>
+    <div id="divSideMenuBurgerClose" class="burgermenuclose">
+        <img src="assets/img/close-circle-outline.svg" class="burgermenucloseicon" onclick="return closeNav();" alt="close" />
+    </div>
+    <div>
+        <div id="mySidenav" class="sidenav">
+
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/home-outline.svg" alt="Home" /></div>
+                <div class="side-menu-text-container"><a href="/">Home</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/cube-outline.svg" alt="Blocks" /></div>
+                <div class="side-menu-text-container"><a href="/blocks/page">Blocks</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/txn-outline.svg" style="height: 33px;" alt="Transactions" /></div>
+                <div class="side-menu-text-container"><a href="/transactions/page">Transactions</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/wallet-outline.svg" alt="Wallet Addresses" /></div>
+                <div class="side-menu-text-container"><a href="/addresses/page">Addresses</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/person-circle-outline.svg" alt="Validators" /></div>
+                <div class="side-menu-text-container"><a href="/validators/page">Validators</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/doc-outline.svg" alt="Documentation" /></div>
+                <div class="side-menu-text-container"><a href="https://dpdocs.org">Documentation</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/x-logo.svg" style="height: 33px;" alt="X Twitter" /></div>
+                <div class="side-menu-text-container"><a href="https://x.com/dogeprotocol1">X Twitter</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/telegram.png" alt="Telegram" /></div>
+                <div class="side-menu-text-container"><a href="https://t.me/dogeprotocolcommunity">Telegram</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/discord.png" alt="Discord" /></div>
+                <div class="side-menu-text-container"><a href="https://discord.gg/bbbMPyzJTM">Discord</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/github-mark.svg" alt="Github" /></div>
+                <div class="side-menu-text-container"><a href="https://github.com/DogeProtocol">Github</a></div>
+            </div>
+            <div class="side-menu-item-container">
+                <div><img class="side-menu-icon" src="assets/img/reddit.png" alt="Reddit" /></div>
+                <div class="side-menu-text-container"><a href="https://www.reddit.com/r/DogeProtocol">Reddit</a></div>
+            </div>
+        </div>
+
+
+        <div class="blocks-wallet">
+            <div class="pagecontent">
+                <div id="mainPage" class="overlay-group">
+
+                    <div class="gradient-rectangle"></div>
+                    <div class="main-container">
+
+                        <div class="logo-text"><a href="/"><img src="assets/img/icon.png" alt="Doge Protocol" class="logo-img" /></a></div>
+                        <div class="logo">
+                            <div class="animate-character" id="divExpTitle"><a href="/">DP Block Explorer</a></div>
+                        </div>
+                        <div class="search-container">
+                            <div class="text-small-gray"><input type="text" class="searchtextbox" placeholder="Search txn, account, block etc." id="txtSearch"></div>
+                            <button type="button" class="search-button"><span role="img" aria-label="search" class="anticon anticon-search" style="font-size: 18px; margin: 5px 0px;"><img class="search-outline" src="assets/img/search-bright.svg" alt="search"></span></button>
+                        </div>
+                        <div class="menu-container-top">
+
+                            <div class="menu-items">
+                                <div class="menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-icon-name">
+                                            <img class="menu-icon" src="assets/img/cube-outline.svg" style="width: 75px; height: 75px; margin-top: 9px;" alt="blocks" />
+                                        </div>
+                                        <div class="menu-name-wrapper">
+                                            <span>Blocks</span>
+                                            <span class="box-menu-link"><a href="#" id="aLatestBlock">123123</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-items">
+                                <div class="menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-icon-name">
+                                            <img class="menu-icon" src="assets/img/txn-outline.svg" style="width: 75px; height: 60px; margin-top: 11px;" alt="transactions" />
+                                        </div>
+                                        <div class="menu-name-wrapper">
+                                            <span>Transactions</span>
+                                            <span class="box-menu-link"><a href="#" id="aTransactions">2567090</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-items">
+                                <div class="menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-icon-name">
+                                            <img class="menu-icon" src="assets/img/wallet-outline.svg" style="width: 75px; margin-left: 10px;" alt="wallet addresses" />
+                                        </div>
+                                        <div class="menu-name-wrapper">
+                                            <span>Wallet Addresses</span>
+                                            <span class="box-menu-link"><a href="#" id="aAddresses">2</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-items">
+                                <div class="menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-icon-name">
+                                            <img class="menu-icon" src="assets/img/person-circle-outline.svg" style="width: 75px; margin-left: 10px;" alt="validators" />
+                                        </div>
+                                        <div class="menu-name-wrapper">
+                                            <span>Validators</span>
+                                            <span class="box-menu-link"><a href="#" id="aValidators">128</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                            <div class="menu-container-top" style="gap:20px;">
+                                <div class="medium-menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-name-wrapper">
+                                            <span class="sub-heading">Supply <img src="assets/img/help-circle-outline.svg" alt="Help" class="help-tooltip" onclick="return ShowDialog('<a href=\&#39;https://dpdocs.org\&#39;>How are the various supply values calculated?</a>');" /></span>
+                                            <div class="medium-menu-wrapper" style="height:162px;">
+                                                <div>
+                                                    <div style="float:left;"><span class="medium-box-menu">Total Supply</span><br /><span class="medium-menu-value">100,000,000,000,000</span></div>
+                                                    <div style="float:left;margin-left:30px;"><span class="medium-box-menu">Circulating Supply</span><br /><span class="medium-menu-value">14,949,594,640,026</span></div>
+                                                </div>
+                                                <div style="display: inline-block; margin-top: 20px;">
+                                                    <div style="float:left;"><span class="medium-box-menu">Converted Supply</span><br /><span class="medium-menu-value">100,000,000,000,000</span></div>
+                                                    <div style="float: left; margin-left: 30px;"><span class="medium-box-menu">Burnt Supply</span><br /><span class="medium-menu-value">50,405,359,974</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="medium-menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-name-wrapper">
+                                            <div><span class="sub-heading">Staked Coins</span><span class="menu-title-val" id="spnStakedCoins">10000000</span></div>
+                                            <div class="medium-menu-wrapper">
+                                                <canvas id="stakeChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="medium-menu-items-row">
+                                    <div class="menu-item">
+                                        <div class="menu-name-wrapper">
+                                            <div><span class="sub-heading">Transactions</span></div>
+                                            <div class="medium-menu-wrapper">
+                                                <canvas id="txnChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-container">
+                                <div class="top_toggle_btn">Latest Blocks</div>
+                                <div class="blocks-content">
+                                    <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Date</th>
+                                                <th>Hash</th>
+                                                <th>Transactions</th>
+                                                <th>Proposer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="#">39122</a></td>
+                                                <td>Jan 20 2024 03:14:48 AM</td>
+                                                <td><a href="#">0xf201...7ea4</a></td>
+                                                <td><a href="#">0</a></td>
+                                                <td><a href="#">0xab01...cea5</a></td>
+                                            </tr>
+                                            <tr class="active-row">
+                                                <td><a href="#">39121</a></td>
+                                                <td>Jan 20 2024 03:14:42 AM</td>
+                                                <td><a href="#">0xf201...7ea4</a></td>
+                                                <td><a href="#">0</a></td>
+                                                <td><a href="#">0xab01...cea5</a></td>
+                                            </tr>
+                                            <!-- and so on... -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="number" style="transform:rotate(180deg) ">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:20px;" alt="previous" />
+                                    </div>
+
+                                    <div class="number selected">
+                                        <div class="number-wrapper selected-number"><a href="#" style="color:#ffffff;">1</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper"><a href="#">2</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper"><a href="#">3</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper">...</div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper">
+                                            <a href="#">10000</a>
+                                        </div>
+                                    </div>
+                                    <div class="number">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:20px;" alt="next" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="menu-container" style="margin-top:20px">
+
+                                <div class="top_toggle_btn">Latest Transactions</div>
+                                <div class="blocks-content">
+                                    <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Hash</th>
+                                                <th>Block</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Type</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="#">0xf201...7ea4</a></td>
+                                                <td>1234</td>
+                                                <td><a href="#">0xab17...9ea5</a></td>
+                                                <td><a href="#">0xeff9...1eb2</a></td>
+                                                <td>Coin Transfer</td>
+                                                <td>1,000,000</td>
+                                            </tr>
+                                            <tr class="active-row">
+                                                <td><a href="#">0xf201...7ea4</a></td>
+                                                <td>1234</td>
+                                                <td><a href="#">0xab17...9ea5</a></td>
+                                                <td><a href="#">0xeff9...1eb2</a></td>
+                                                <td>Coin Transfer</td>
+                                                <td>1,000,000</td>
+                                            </tr>
+                                            <!-- and so on... -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="number" style="transform:rotate(180deg) ">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:20px;" alt="previous" />
+                                    </div>
+
+                                    <div class="number selected">
+                                        <div class="number-wrapper selected-number"><a href="#" style="color:#ffffff;">1</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper"><a href="#">2</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper"><a href="#">3</a></div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper">...</div>
+                                    </div>
+                                    <div class="number">
+                                        <div class="number-wrapper">
+                                            <a href="#">10000</a>
+                                        </div>
+                                    </div>
+                                    <div class="number">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:20px;" alt="next" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-container-mobile">
+                                <div class="top_toggle_btn">Latest Blocks</div>
+                                <div class="blocks-content">
+                                    <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Block Details</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Number: <a href="#">39122</a><br />
+
+                                                    Hash: <a href="#">0xf201...7ea4</a><br />
+
+                                                    Jan 20 2024 03:14:42 AM<br />
+
+                                                    Proposer: <a href="#">0xab01...cea5</a><br />
+
+                                                    Transactions: <a href="#">20000</a>
+                                                </td>
+
+                                            </tr>
+                                            <tr class="active-row">
+                                                <td>
+                                                    Number: <a href="#">39121</a><br />
+
+                                                    Hash: <a href="#">0xf201...7ea4</a><br />
+
+                                                    Jan 20 2024 03:14:36 AM<br />
+
+                                                    Proposer: <a href="#">0xab01...cea5</a><br />
+
+                                                    Transactions: <a href="#">342598</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="number" style="transform:rotate(180deg)">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:30px;" alt="previous" />
+                                    </div>
+
+                                    <div class="number">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:30px;" alt="next" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="menu-container-mobile">
+                                <div class="top_toggle_btn">Latest Transactions</div>
+                                <div class="blocks-content">
+                                    <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Transaction Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Hash: <a href="#">0xf201...7ea4</a><br />
+
+                                                    Block: <a href="#">39122</a><br />
+
+                                                    From: <a href="#">0xa5s1...9ea3</a><br />
+
+                                                    To: <a href="#">0xe302...3ea1</a><br />
+
+                                                    Type: Coin Transfer <br />
+
+                                                    Amount: 20000
+                                                </td>
+
+                                            </tr>
+                                            <tr class="active-row">
+                                                <td>
+                                                    Hash: <a href="#">0xeb01...a001</a><br />
+
+                                                    Block: <a href="#">39121</a><br />
+
+                                                    From: <a href="#">0xa4a1...9ea3</a><br />
+
+                                                    To: <a href="#">0xe402...3ea1</a><br />
+
+                                                    Type: Coin Transfer <br />
+
+                                                    Amount: 110000
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="number" style="transform:rotate(180deg)">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:30px;" alt="previous" />
+                                    </div>
+
+                                    <div class="number">
+                                        <img src="assets/img/chevron-back-sharp.svg" style="width:30px;" alt="next" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="divModalText">Some text in the Modal..</div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener("load", (event) => {
+            const obj1 = document.getElementById("aLatestBlock");
+            animateValue(obj1, 42201, 42241, 2000);
+
+            const obj2 = document.getElementById("aTransactions");
+            animateValue(obj2, 2567070, 2567090, 2000);
+
+            const obj3 = document.getElementById("aAddresses");
+            animateValue(obj3, 123, 140, 2000);
+
+            const obj4 = document.getElementById("aValidators");
+            animateValue(obj4, 3, 23, 2000);
+
+            const obj5 = document.getElementById("spnStakedCoins");
+            animateValue(obj5, 20123456, 20125456, 2000);
+            return false;
+        });
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        function ShowDialog(dialogText) {
+            modal.style.display = "block";
+            document.getElementById("divModalText").innerHTML = dialogText;
+            return false;
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        let ctxStake = document.getElementById("stakeChart").getContext("2d");
+        let stakeChart = new Chart(ctxStake, {
+            type: "line",
+            data: {
+                labels: [
+                    "Jan-24",
+                    "Feb-24",
+                    "Mar-24",
+                    "Apr-24",
+                ],
+                datasets: [
+                    {
+                        label: "Staked Coins",
+                        data: [2, 9, 3, 17],
+                        backgroundColor: "rgba(153,205,1,0.6)",
+                    },
+
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Billions'
+                        }
+                    }]
+                }
+            }
+        });
+
+        let ctxTxn = document.getElementById("txnChart").getContext("2d");
+        let txnChart = new Chart(ctxTxn, {
+            type: "line",
+            data: {
+                labels: [
+                    "01-Jan",
+                    "02-Jan",
+                    "03-Jan",
+                    "04-Jan",
+                    "05-Jan",
+                    "06-Jan",
+                    "07-Jan",
+                ],
+                datasets: [
+                    {
+                        label: "Transactions",
+                        data: [120000, 3223875, 92342, 25346,3345435,4325688,9969878],
+                        backgroundColor: "purple",
+                        fill: false,
+                    },
+
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Daily Txns'
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
